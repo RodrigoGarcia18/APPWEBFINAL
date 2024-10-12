@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -14,7 +15,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role', // Asegúrate de incluir el campo role aquí
+        'role', 
+        'codigo', 
+        'organization_id', 
     ];
 
     protected $hidden = [
@@ -26,10 +29,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    
-    
 
-    // Métodos para verificar el rol del usuario
+
+
+
     public function isAdmin()
     {
         return $this->role === 'admin';
@@ -43,5 +46,39 @@ class User extends Authenticatable
     public function isStudent()
     {
         return $this->role === 'student';
+    }
+
+
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class); 
+    }
+
+
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'course_user');
+    }
+
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_user', 'user_id', 'course_id');
+    }
+    public function activities()
+    {
+        return $this->belongsToMany(Activity::class, 'activity_user')
+            ->withTimestamps();
     }
 }
