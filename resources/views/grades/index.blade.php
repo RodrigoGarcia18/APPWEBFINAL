@@ -2,25 +2,25 @@
 
 @section('content')
 <style>
-    /* Custom styles for footer colors */
+
     .footer-color-1 {
-        background-color: #FF6B6B; /* Red */
+        background-color: #FF6B6B; 
     }
     .footer-color-2 {
-        background-color: #6BCB77; /* Green */
+        background-color: #6BCB77; 
     }
     .footer-color-3 {
-        background-color: #FFD93D; /* Yellow */
+        background-color: #FFD93D; 
     }
     .footer-color-4 {
-        background-color: #FF4D4D; /* Dark Red */
+        background-color: #FF4D4D; 
     }
     .footer-color-5 {
-        background-color: #6F42C1; /* Purple */
+        background-color: #6F42C1; 
     }
 
     .card-footer-custom {
-        height: 10px; /* Optional height for footer */
+        height: 10px; 
     }
 
     .course-card {
@@ -30,7 +30,7 @@
     }
 
     .course-card:hover {
-        background-color: #e9ecef; /* Light gray on hover */
+        background-color: #e9ecef; 
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
@@ -47,10 +47,10 @@
 
     .activity-card {
         background-color: transparent;
-        border: 1px solid #007BFF; /* Blue border */
+        border: 1px solid #007BFF; 
         padding: 10px;
         margin-top: 10px;
-        border-radius: 5px; /* Round corners */
+        border-radius: 5px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -69,7 +69,7 @@
         transform: rotate(180deg);
     }
 
-    /* Better layout of the activity content */
+
     .activity-title {
         font-weight: bold;
         color: blue;
@@ -82,7 +82,9 @@
     }
 
     .edit-button {
-        margin-left: 10px; /* Space between the title and the button */
+        margin-left: 10px;
+        background-color: #007BFF;
+        border-color: #007BFF; 
     }
 </style>
 
@@ -108,7 +110,7 @@
                     <div class="card-footer card-footer-custom footer-color-{{ ($index % 5) + 1 }}"></div>
                 </div>
 
-                <!-- Activities List -->
+                
                 <div class="activities-list" id="activities-{{ $course->id }}" style="max-height: 0;">
                     @foreach($course->activities as $activity)
                         <div class="activity-card">
@@ -129,7 +131,7 @@
                                 <div class="activity-icon">
                                     <i class="bi bi-card-checklist"></i>
                                 </div>
-                                <a href="{{ route('teacher.grades.submissions', $activity->id) }}" class="btn btn-sm btn-secondary edit-button">Asignar  Notas</a>
+                                <a href="{{ route('teacher.grades.submissions', $activity->id) }}" class="btn btn-sm btn-secondary edit-button">Ver  Notas</a>
                             </div>
                         </div>
                     @endforeach
