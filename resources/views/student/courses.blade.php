@@ -21,37 +21,36 @@
     .card-footer-custom {
         height: 10px; /* Altura opcional para el pie de página */
     }
-    /* Estilo para el contenedor del filtro */
+
     .filter-container {
-        background-color: #f8f9fa; /* Color de fondo claro */
-        padding: 20px; /* Espaciado mayor */
-        border-radius: 8px; /* Bordes redondeados */
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-        margin-bottom: 20px; /* Espacio inferior */
+        background-color: #f8f9fa; 
+        padding: 20px; 
+        border-radius: 8px; 
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+        margin-bottom: 20px; 
     }
-    /* Mejora del diseño del select */
+
     .form-select {
-        font-size: 1.1rem; /* Aumentar el tamaño de la letra */
-        padding: 10px; /* Espaciado interno */
-        border-radius: 5px; /* Bordes redondeados */
-        border: 1px solid #ced4da; /* Bordes más definidos */
-        transition: border-color 0.3s ease; /* Transición suave al enfocar */
+        font-size: 1.1rem; 
+        padding: 10px; 
+        border-radius: 5px; 
+        border: 1px solid #ced4da; 
+        transition: border-color 0.3s ease; 
     }
     .form-select:focus {
-        border-color: #007bff; /* Color del borde al enfocar */
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra al enfocar */
+        border-color: #007bff; 
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); 
     }
 </style>
 
 <div class="container-fluid">
     <h1 class="text-center mb-4">Mis Cursos </h1>
 
-    <!-- Contenedor de filtro -->
+
     <div class="filter-container">
-        <!-- Formulario de filtros -->
+
         <form method="GET" action="{{ route('student.courses.view') }}">
             <div class="row">
-                <!-- Selección por periodo del curso -->
                 <div class="col-md-4 mb-3 mb-md-0">
                     <label for="course_period" class="form-label">Selecciona un periodo:</label>
                     <select class="form-select" name="course_period" id="course_period">

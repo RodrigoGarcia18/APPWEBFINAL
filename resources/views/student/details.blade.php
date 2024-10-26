@@ -43,7 +43,7 @@
                                 <p class="card-subtitle mb-2 text-muted">Actividad ID: {{ $activity->id }}</p>
                                 <p class="card-text mb-0">
                                     <i class="bi bi-check-circle text-success"></i> 
-                                    Fecha de vencimiento: {{ date('d M Y', strtotime($activity->end_date)) }} <!-- Convertimos a timestamp -->
+                                    Fecha de vencimiento: {{ date('d M Y', strtotime($activity->end_date)) }} 
                                 </p>
                                 <p class="card-text mb-0"><strong>Descripción:</strong> {{ $activity->description }}</p>
                             </div>
@@ -52,13 +52,12 @@
                                 $submission = App\Models\ActivitySubmission::where('user_id', auth()->id())
                                     ->where('activity_id', $activity->id)
                                     ->first();
-                                $isPastDeadline = now()->timestamp > strtotime($activity->end_date); // Verifica si la fecha de vencimiento ha pasado
+                                $isPastDeadline = now()->timestamp > strtotime($activity->end_date); 
                             @endphp
 
-                            @if($submission) <!-- Si la actividad ha sido enviada -->
+                            @if($submission) 
                                 <p class="text-success mb-0"><strong>Tarea enviada</strong></p>
-                            @elseif(!$isPastDeadline) <!-- Si no ha pasado la fecha de vencimiento -->
-                                <!-- Botón de envío que redirige al formulario de envío de actividad -->
+                            @elseif(!$isPastDeadline) 
                                 <a href="{{ route('activity.submit', $activity->id) }}" class="btn btn-success btn-sm ms-3">Enviar</a>
                             @else
                                 <p class="text-danger mb-0"><strong>No se puede enviar, la fecha de vencimiento ha pasado</strong></p>
@@ -72,7 +71,6 @@
 </div>
 
 <style>
-    /* Estilos personalizados para darle un diseño atractivo */
     .card {
         border-radius: 15px;
         overflow: hidden;

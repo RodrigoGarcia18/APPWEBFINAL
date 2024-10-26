@@ -41,13 +41,13 @@
         transition: background-color 0.3s;
     }
     .btn-primary:hover {
-        background-color: #0056b3; /* Color más oscuro al pasar el mouse */
+        background-color: #0056b3; 
     }
     .btn-secondary {
         transition: background-color 0.3s;
     }
     .btn-secondary:hover {
-        background-color: #6c757d; /* Color más oscuro al pasar el mouse */
+        background-color: #6c757d; 
     }
 </style>
 @endsection

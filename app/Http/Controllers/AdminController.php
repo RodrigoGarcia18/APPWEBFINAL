@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User; // Asegúrate de incluir el modelo User
+use App\Models\User; 
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Course;
@@ -13,14 +13,14 @@ use App\Models\Teacher;
 
 class AdminController extends Controller
 {
-    // Método para mostrar la lista de usuarios
+
     public function viewUsers(Request $request)
     {
         
         $query = User::query();
 
         
-        if ($request->filled('role') && $request->role != 'all') { // Puedes usar 'all' para mostrar todos los roles
+        if ($request->filled('role') && $request->role != 'all') { 
             $query->where('role', $request->role);
         }
 
@@ -53,16 +53,15 @@ class AdminController extends Controller
 
     public function edit($id)
     {
-        // Obtén el usuario por su ID
+
         $user = User::with(['teacher', 'student'])->findOrFail($id);
 
-        // Retorna la vista de edición con el usuario
+
         return view('admin.users.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
-        // Valida la entrada
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
@@ -76,10 +75,10 @@ class AdminController extends Controller
             'enrollment_number' => 'required|string|max:20|unique:students,enrollment_number,' . $request->input('enrollment_number'),
         ]);
 
-        // Encuentra el usuario
+
         $user = User::findOrFail($id);
 
-        // Actualiza los datos del usuario
+
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         if ($request->input('password')) {
@@ -88,7 +87,7 @@ class AdminController extends Controller
         $user->codigo = $request->input('codigo');
         $user->save();
 
-        // Actualiza la información del docente o estudiante
+
         if ($user->role === 'teacher') {
             $user->teacher()->update([
                 'dni' => $request->input('dni'),
@@ -107,7 +106,7 @@ class AdminController extends Controller
             ]);
         }
 
-        // Redirige a una página con un mensaje de éxito
+ 
         return redirect()->route('admin.users.index')->with('success', 'Usuario actualizado exitosamente.');
     }
     
@@ -191,26 +190,25 @@ class AdminController extends Controller
 
     public function storeCourse(Request $request)
     {
-        // Validar los datos del formulario
+
         $request->validate([
             'name' => 'required|string|max:255',
             'course_id' => 'required|string|max:100',
             'description' => 'nullable|string|max:500',
-            'period' => 'required|string|max:100', // Agregar validación para el período
-            'user_ids' => 'required|array', // Asegúrate de que se envíen los IDs de los usuarios
+            'period' => 'required|string|max:100', 
+            'user_ids' => 'required|array', 
             'user_ids.*' => 'exists:users,id',
         ]);
     
-        // Crear el curso
         $course = Course::create([
             'name' => $request->name,
             'course_id' => $request->course_id,
             'description' => $request->description,
-            'period' => $request->period, // Agregar el período al crear el curso
-            'session_link' => null, // Establecer session_link como null
+            'period' => $request->period, 
+            'session_link' => null, 
         ]);
     
-        // Asociar usuarios con el curso
+        
         $course->users()->attach($request->user_ids);
     
         return redirect()->route('admin.courses.view')->with('success', 'Curso creado exitosamente.');

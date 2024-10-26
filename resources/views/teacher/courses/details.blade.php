@@ -14,14 +14,14 @@
                     <h3 class="card-title">{{ $course->name }}</h3>
                     <p class="card-text text-muted">{{ $course->description }}</p>
                 </div>
-                <span class="badge bg-primary p-2">{{ $course->course_id }}</span> <!-- Muestra el ID del curso como una insignia -->
+                <span class="badge bg-primary p-2">{{ $course->course_id }}</span> 
             </div>
             <hr>
             <p class="card-text"><strong>Docentes Asignados:</strong> 
                 {{ $course->users->filter(function($user) {
-                    return $user->role === 'teacher'; // Filtrar solo los docentes
+                    return $user->role === 'teacher'; 
                 })->isNotEmpty() ? $course->users->filter(function($user) {
-                    return $user->role === 'teacher'; // Filtrar solo los docentes
+                    return $user->role === 'teacher'; 
                 })->pluck('name')->join(', ') : 'No hay docentes asignados' }}
             </p>
             
@@ -45,16 +45,16 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Email</th>
-                            <th>DNI/Código</th> <!-- Cambié el encabezado para incluir Código -->
+                            <th>DNI/Código</th> 
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($course->users->where('role', 'student') as $user)
-                            @if ($student = $user->student) <!-- Asumiendo que hay una relación entre User y Student -->
+                            @if ($student = $user->student) 
                                 <tr>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $student->dni }}</td> <!-- Mostrar el código desde la tabla students -->
+                                    <td>{{ $student->dni }}</td> 
                                 </tr>
                             @endif
                         @endforeach
@@ -74,7 +74,7 @@
 </div>
 
 <style>
-    /* Estilos personalizados para darle un diseño atractivo */
+    
     .card {
         border-radius: 15px;
         overflow: hidden;
@@ -97,7 +97,7 @@
         padding: 0.75rem 1.5rem;
         font-size: 1.1rem;
     }
-    /* Diseño de la tabla de estudiantes */
+
     .table {
         margin-top: 20px;
         border-radius: 15px;
@@ -105,13 +105,13 @@
     }
     .table th, .table td {
         vertical-align: middle;
-        text-align: center; /* Centrar texto en las celdas */
+        text-align: center; 
     }
     .table-striped tbody tr:nth-of-type(odd) {
-        background-color: #f9f9f9; /* Color de fondo alternativo para filas */
+        background-color: #f9f9f9; 
     }
     .table-bordered th, .table-bordered td {
-        border: 1px solid #dee2e6; /* Borde para las celdas */
+        border: 1px solid #dee2e6;
     }
 </style>
 @endsection

@@ -11,13 +11,13 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('activities', function (Blueprint $table) {
-            $table->id(); // ID de la actividad
-            $table->string('activity_code')->unique(); // Código único para identificar la actividad
-            $table->string('name'); // Nombre de la actividad
-            $table->text('description')->nullable(); // Descripción de la actividad
+            $table->id(); 
+            $table->string('activity_code')->unique(); 
+            $table->string('name'); 
+            $table->text('description')->nullable(); 
             $table->unsignedBigInteger('course_id'); // Relación con el curso
-            $table->date('start_date'); // Fecha de inicio de la actividad
-            $table->date('end_date'); // Fecha de finalización de la actividad
+            $table->date('start_date');
+            $table->date('end_date'); 
             $table->timestamps(); // Fechas de creación y actualización
 
             // Relación con la tabla courses

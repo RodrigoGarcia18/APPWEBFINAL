@@ -10,10 +10,10 @@
     <title>@yield('title', 'Dashboard')</title>
     <style>
         body {
-            background-color: #eaeaea; /* Color de fondo claro */
+            background-color: #eaeaea; 
             font-family: 'Roboto', sans-serif;
-            transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
-            height: 100vh; /* Asegura que el cuerpo ocupe toda la altura */
+            transition: background-color 0.3s, color 0.3s;
+            height: 100vh; 
         }
         .sidebar {
             height: 100vh;
@@ -22,8 +22,8 @@
             padding: 20px;
             font-size: 0.9rem;
             text-transform: uppercase;
-            transition: background-color 0.3s; /* Transición suave */
-            position: fixed; /* Fija la barra lateral */
+            transition: background-color 0.3s; 
+            position: fixed; 
         }
         .sidebar a {
             color: white;
@@ -118,6 +118,9 @@
                         </button>
                     </form>
                 </div>
+
+
+                
             </div>
             <div class="col-md-10 content-area">
                 <div class="container">
@@ -129,5 +132,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
+
+
+
+
 </html>

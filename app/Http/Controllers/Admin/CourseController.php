@@ -123,16 +123,16 @@ class CourseController extends Controller
 
     public function viewStudents(Request $request)
     {
-        // Obtener los parámetros de filtro
+        
         $courseName = $request->input('course_name');
         $period = $request->input('period');
     
-        // Obtener todos los períodos disponibles
-        $periods = Course::distinct()->pluck('period'); // Asegúrate de obtener todos los períodos únicos
+       
+        $periods = Course::distinct()->pluck('period'); 
     
-        // Filtrar estudiantes con cursos que coinciden con el filtro
+        
         $students = User::with(['courses' => function($query) use ($courseName, $period) {
-            // Filtrar cursos según los criterios
+            
             if ($courseName) {
                 $query->where('name', 'like', '%' . $courseName . '%');
             }

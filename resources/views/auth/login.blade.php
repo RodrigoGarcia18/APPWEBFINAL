@@ -10,17 +10,17 @@
     <title>Iniciar Sesión</title>
     <style>
         body {
-            background-image: url('{{ asset('images/background.jpg') }}'); /* Imagen de fondo */
-            background-size: cover; /* Cubrir toda la pantalla */
-            background-position: center; /* Centrar la imagen */
+            background-image: url('{{ asset('images/background.jpg') }}'); 
+            background-size: cover; 
+            background-position: center; 
             font-family: 'Roboto', sans-serif;
-            height: 100vh; /* Altura completa de la ventana */
-            display: flex; /* Habilitar flexbox */
-            align-items: center; /* Centrar verticalmente */
-            justify-content: center; /* Centrar horizontalmente */
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
         }
         .form-card {
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad */
+            background-color: rgba(255, 255, 255, 0.9); 
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
@@ -31,17 +31,17 @@
             transform: translateY(-5px);
         }
         .logo {
-            font-size: 70px; /* Tamaño del icono */
-            color: #ff0000; /* Color rojo para el icono */
+            font-size: 70px; 
+            color: #ff0000; 
             margin-bottom: 20px;
-            text-align: center; /* Centramos el logo */
+            text-align: center; 
         }
         .btn-primary {
-            background-color: #ff0000; /* Rojo */
+            background-color: #ff0000; 
             border: none;
         }
         .btn-primary:hover {
-            background-color: #cc0000; /* Rojo más oscuro al pasar el ratón */
+            background-color: #cc0000; 
         }
         .text-muted {
             text-align: center;
@@ -52,7 +52,7 @@
 <body>
     <div class="form-card">
         <div class="logo">
-            <i class="fas fa-book"></i> <!-- Cambia el icono aquí según sea necesario -->
+            <i class="fas fa-book"></i> 
         </div>
         <h2 class="text-center">Iniciar Sesión</h2>
 

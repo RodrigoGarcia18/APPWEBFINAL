@@ -8,12 +8,12 @@
                 <img src="{{ asset('path/to/admin-icon.png') }}" alt="Admin Icon" class="profile-image rounded-circle" style="max-width: 80px;">
             @elseif(auth()->user()->isTeacher())
                 @php
-                    $teacher = auth()->user()->teacher; // Relación con el modelo Teacher
+                    $teacher = auth()->user()->teacher; 
                 @endphp
                 <img src="{{ $teacher->profile_image }}" alt="Imagen de Perfil" class="profile-image rounded-circle" style="max-width: 120px;">
             @elseif(auth()->user()->isStudent())
                 @php
-                    $student = auth()->user()->student; // Relación con el modelo Student
+                    $student = auth()->user()->student; 
                 @endphp
                 <img src="{{ $student->profile_image }}" alt="Imagen de Perfil" class="profile-image rounded-circle" style="max-width: 120px;">
             @endif

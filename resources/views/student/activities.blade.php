@@ -2,7 +2,6 @@
 
 @section('content')
 <style>
-    /* Custom styles for activity footer colors */
     .footer-color-1 {
         background-color: #FF6B6B; /* Red */
     }
@@ -46,12 +45,12 @@
 
     .activity-card {
         background-color: transparent;
-        border: 1px solid #007BFF; /* Blue border */
+        border: 1px solid #007BFF; 
         padding: 10px;
         margin-top: 10px;
-        border-radius: 5px; /* Round corners */
+        border-radius: 5px;
         display: flex;
-        flex-direction: column; /* Allows stacking of elements */
+        flex-direction: column;
     }
 
     .activity-icon {
@@ -67,7 +66,6 @@
         transform: rotate(180deg);
     }
 
-    /* Better layout of the activity content */
     .activity-title {
         font-weight: bold;
         color: blue;
@@ -80,28 +78,28 @@
     }
     
     .note-box {
-        border: 1px solid transparent; /* Remove background rectangle */
-        border-radius: 4px; /* Rounded corners for any future effects */
-        padding: 10px 0; /* Only top and bottom padding */
-        font-weight: bold; /* Bold text */
-        color: black; /* Black text color */
-        margin-top: 10px; /* Space above note box */
-        font-size: 1.25rem; /* Increased font size */
-        display: flex; /* Use flexbox for layout */
-        align-items: center; /* Center align items vertically */
-        justify-content: flex-end; /* Align items to the right */
+        border: 1px solid transparent; 
+        border-radius: 4px; 
+        padding: 10px 0; 
+        font-weight: bold; 
+        color: black; 
+        margin-top: 10px; 
+        font-size: 1.25rem; 
+        display: flex; 
+        align-items: center; 
+        justify-content: flex-end; 
     }
 
     .note-square {
-        width: 20px; /* Width of the square */
-        height: 20px; /* Height of the square */
-        background-color: black; /* Black color */
-        border-radius: 2px; /* Optional: rounded corners */
-        margin-left: 10px; /* Space between square and note */
+        width: 20px; 
+        height: 20px; 
+        background-color: black; 
+        border-radius: 2px; 
+        margin-left: 10px; 
     }
 
     .edit-button {
-        margin-left: 10px; /* Add space between title and button */
+        margin-left: 10px; 
     }
 </style>
 
@@ -110,7 +108,7 @@
 
     <form method="GET" action="{{ route('student.activities.view') }}">
         <div class="row">
-            <!-- Selección por periodo del curso -->
+
             <div class="col-md-4 mb-3 mb-md-0">
                 <label for="course_period" class="form-label">Selecciona un periodo:</label>
                 <select class="form-select" name="course_period" id="course_period">
@@ -122,7 +120,7 @@
                     @endforeach
                 </select>
             </div>
-            <!-- Botón de filtro -->
+
             <div class="col-md-2 mb-3 mb-md-0">
                 <button type="submit" class="btn btn-primary w-100">Filtrar</button>
             </div>
@@ -147,7 +145,7 @@
                     <div class="card-footer card-footer-custom footer-color-{{ ($index % 5) + 1 }}"></div>
                 </div>
 
-                <!-- Activities List -->
+    
                 <div class="activities-list" id="activities-{{ $course->id }}" style="max-height: 0;">
                     @foreach($course->activities as $activity)
                     <div class="activity-card">
@@ -164,7 +162,7 @@
                                 <strong>Descripción:</strong> {{ $activity->description }}
                             </p>
                         </div>
-                        <!-- Nota de la actividad alineada a la derecha -->
+
                         <div class="note-box">
                             <span class="ms-2">Nota: {{ $activity->submissions->first()->nota->nota ?? 'Sin nota' }}</span>
                         </div>

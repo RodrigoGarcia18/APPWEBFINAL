@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\ActivitySubmission;
 use Illuminate\Http\Request;
 use App\Models\Activity;
@@ -15,7 +14,7 @@ class ActivitySubmissionController extends Controller
     public function create($activityId)
     {
         $activity = Activity::findOrFail($activityId);
-        $course = Course::findOrFail($activity->course_id); // Asegúrate de tener esta relación
+        $course = Course::findOrFail($activity->course_id); 
 
         return view('activity_submissions.create', compact('activity', 'course'));
     }

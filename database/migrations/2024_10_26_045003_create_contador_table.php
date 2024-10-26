@@ -6,25 +6,31 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('contador', function (Blueprint $table) {
             $table->id(); 
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Relación con la tabla users
-            $table->string('first_name'); // Nombre del estudiante
-            $table->string('last_name'); // Apellido del estudiante
-            $table->string('dni')->unique(); // DNI del estudiante
+            $table->string('first_name'); 
+            $table->string('last_name'); // Apellido del docente
+            $table->string('dni')->unique(); // DNI del docente
             $table->date('birth_date'); // Fecha de nacimiento
-            $table->string('enrollment_number')->nullable(); // Número de matrícula
-            $table->string('address')->nullable(); // Dirección del estudiante
-            $table->string('phone')->nullable(); // Teléfono del estudiante
+            $table->string('subject')->nullable(); // Materia en la que esta especializado
+            $table->string('address')->nullable(); 
+            $table->string('phone')->nullable(); 
             $table->string('profile_image')->nullable(); // URL de la imagen de perfil
             $table->timestamps(); // Fechas de creación y actualización
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('contador');
     }
 };

@@ -2,7 +2,7 @@
 
 @section('content')
 <style>
-    /* Custom styles for course footer colors */
+
     .footer-color-1 {
         background-color: #FF6B6B; /* Red */
     }
@@ -26,20 +26,20 @@
 <div class="container-fluid">
     <h1 class="text-center mb-4">Mis Cursos</h1>
 
-    <form method="GET" action="{{ route('teacher.courses.view') }}"> <!-- Agregar el método GET y la acción -->
+    <form method="GET" action="{{ route('teacher.courses.view') }}"> 
         <div class="row mb-4">
             <div class="col-md-4 mb-3 mb-md-0">
                 <div class="input-group">
                     
-                    <input type="text" name="name" class="form-control border-start-0" placeholder="Busque sus cursos" value="{{ request('name') }}"> <!-- Cambiar a 'name' -->
-                    <button type="submit" class="btn btn-primary">Buscar</button> <!-- Botón de búsqueda al lado del input -->
+                    <input type="text" name="name" class="form-control border-start-0" placeholder="Busque sus cursos" value="{{ request('name') }}"> 
+                    <button type="submit" class="btn btn-primary">Buscar</button>
                 </div>
             </div>
             <div class="col-md-3 mb-3 mb-md-0">
-                <select class="form-select" name="course_period"> <!-- Asegúrate de que el nombre coincida con el campo del controlador -->
+                <select class="form-select" name="course_period">
                     <option value="">Todos los periodos</option>
                     @foreach($periods as $period)
-                        <option value="{{ $period }}" {{ request('course_period') == $period ? 'selected' : '' }}>{{ $period }}</option> <!-- Mantener la selección -->
+                        <option value="{{ $period }}" {{ request('course_period') == $period ? 'selected' : '' }}>{{ $period }}</option> 
                     @endforeach
                 </select>
             </div>
@@ -75,7 +75,7 @@
                             <i class="bi bi-star text-muted"></i>
                         </div>
                     </div>
-                    <div class="card-footer card-footer-custom footer-color-{{ ($index % 5) + 1 }}"></div> <!-- Apply footer color -->
+                    <div class="card-footer card-footer-custom footer-color-{{ ($index % 5) + 1 }}"></div> 
                 </div>
             </div>
         @empty

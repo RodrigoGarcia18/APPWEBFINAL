@@ -54,7 +54,7 @@
 </div>
 
 <script>
-    // Validación de formulario Bootstrap
+    
     (function () {
         'use strict'
         const forms = document.querySelectorAll('.needs-validation')

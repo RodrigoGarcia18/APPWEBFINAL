@@ -5,7 +5,6 @@
     <h1 class="text-danger display-4 text-center font-weight-bold">Asistencias Registradas para {{ $course->name }}</h1>
     <hr class="border-dark">
 
-    <!-- Formulario de filtrado -->
     <div class="card mb-4">
         <div class="card-body">
             <form method="GET" action="{{ route('teacher.attendance.details', $course->id) }}">
@@ -27,7 +26,7 @@
         </div>
     </div>
 
-    <!-- Tabla de asistencias -->
+
     <div class="card">
         <div class="card-body">
             <table class="table table-striped table-bordered">

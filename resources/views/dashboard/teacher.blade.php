@@ -3,12 +3,12 @@
 @section('content')
 <div class="container mt-4">
     <h1 class="text-danger display-4 text-center font-weight-bold">Bienvenido,  <strong>{{ Auth::user()->name }}</strong></h1> <!-- Título centrado -->
-    <hr class="border-dark"> <!-- Línea negra debajo del título -->
+    <hr class="border-dark"> 
 
     <div class="row mt-4">
 
         <div class="col-md-4">
-            <div class="card mb-4 shadow"> <!-- Tarjeta para cursos -->
+            <div class="card mb-4 shadow"> 
                 <div class="card-header bg-danger text-white text-center font-weight-bold">
                     <i class="fas fa-book fa-lg"></i> Mis Cursos
                 </div>
@@ -22,7 +22,7 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card mb-4 shadow"> <!-- Tarjeta para notas -->
+            <div class="card mb-4 shadow"> 
                 <div class="card-header bg-danger text-white text-center font-weight-bold">
                     <i class="fas fa-graduation-cap fa-lg"></i> Notas
                 </div>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card mb-4 shadow"> <!-- Tarjeta para asistencia -->
+            <div class="card mb-4 shadow"> 
                 <div class="card-header bg-danger text-white text-center font-weight-bold">
                     <i class="fas fa-check-circle fa-lg"></i> Asistencia
                 </div>
@@ -52,12 +52,12 @@
 
 <style>
     body {
-        font-family: 'Roboto', sans-serif; /* Cambia la fuente a Roboto */
-        background-color: #f8f9fa; /* Color de fondo de la página */
+        font-family: 'Roboto', sans-serif; 
+        background-color: #f8f9fa; 
     }
 
     hr {
-        margin-top: 10px; /* Ajusta el espacio superior de la línea */
+        margin-top: 10px; 
         margin-bottom: 20px; 
         border-width: 2px; 
     }

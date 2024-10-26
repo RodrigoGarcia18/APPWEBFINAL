@@ -7,19 +7,19 @@
     }
     h1 {
         color: #343a40;
-        margin-bottom: 20px; /* Increased bottom margin for better spacing */
-        text-align: center; /* Center the heading */
+        margin-bottom: 20px; 
+        text-align: center; 
     }
     .table {
         border: 1px solid #dee2e6;
         border-radius: 0.25rem;
         overflow: hidden;
-        width: 100%; /* Ensure the table is full-width */
-        margin-bottom: 30px; /* Space below the table */
+        width: 100%; 
+        margin-bottom: 30px; 
     }
     .table th, .table td {
         vertical-align: middle;
-        padding: 15px; /* Increased padding for better cell spacing */
+        padding: 15px; 
     }
     .table th {
         background-color: #007BFF;
@@ -85,7 +85,7 @@
                                 @if($submission->filepath)
                                     <a href="{{ asset($submission->filepath) }}">{{ basename($submission->filepath) }}</a>
                                 @else
-                                    <span class="text-danger">No entregado</span> <!-- Display "No entregado" if no file -->
+                                    <span class="text-danger">No entregado</span> 
                                 @endif
                             </td>
                             <td>
@@ -98,14 +98,14 @@
                 </tbody>
             </table>
 
-            <!-- Botón para actualizar todas las notas -->
+            
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Actualizar Todas las Notas</button>
             </div>
         </form>
     @endif
 
-    <!-- Botón para regresar a lo anterior -->
+    
     <div class="text-center">
         <a href="{{ url()->previous() }}" class="btn-back">Regresar</a>
     </div>

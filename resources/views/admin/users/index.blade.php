@@ -8,7 +8,6 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <!-- Opciones de Filtrado -->
     <form method="GET" class="mb-4">
         <div class="form-row align-items-end">
             <div class="col-auto">
@@ -54,11 +53,11 @@
                         <td>{{ $user->codigo }}</td>
                         <td>
                             @if ($user->role === 'teacher')
-                                {{ $user->teacher->dni ?? 'N/A' }} <!-- DNI del teacher -->
+                                {{ $user->teacher->dni ?? 'N/A' }} 
                             @elseif ($user->role === 'student')
-                                {{ $user->student->dni ?? 'N/A' }} <!-- DNI del estudiante -->
+                                {{ $user->student->dni ?? 'N/A' }} 
                             @else
-                                N/A <!-- Para otros roles -->
+                                N/A 
                             @endif
                         </td>
                         <td>
