@@ -21,7 +21,7 @@ return new class extends Migration
             $table->rememberToken(); // Token para recordar la sesión
             $table->enum('role', ['admin', 'teacher', 'student','contador']);
             $table->string('codigo')->nullable(); //codigo de llamada unica
-            $table->string('dni')->nullable(); //codigo de llamada unica
+            $table->string('dni')->nullable(); 
             $table->foreignId('organization_id')->nullable()->constrained()->onDelete('set null'); // Relación opcional con la organización
             $table->timestamps(); // Fechas de creación y actualización
         });

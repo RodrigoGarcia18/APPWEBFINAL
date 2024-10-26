@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('servicio'); // Servicio asociado al voucher
             $table->timestamps();
 
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Relación con users
+            $table->foreignId('user_dni')->constrained('users')->onDelete('cascade'); // Relación con users
 
 
         });
