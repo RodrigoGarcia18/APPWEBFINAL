@@ -14,6 +14,16 @@ use App\Http\Controllers\ActivitySubmissionController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\UpdateUserController;
 use App\Models\User;
+use GuzzleHttp\Psr7\Request;
+
+//redireccion a login
+Route::get('/', function () {
+    if (session('user')) {
+        return redirect('/dashboard');
+    } else {
+        return redirect('/login');
+    }
+});
 
 // Rutas de autenticación
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -39,8 +49,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/admin/users/{id}', [UpdateUserController::class, 'update'])->name('admin.users.update');
     Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
 
-    //Rutas de cursos   
-    
+    //Rutas de cursos
+
     Route::get('/admin/courses', [CourseController::class, 'index'])->name('admin.courses.index');
     Route::get('/admin/courses', [CourseController::class, 'viewCourses'])->name('admin.courses.view');
     Route::get('/admin/courses/create', [CourseController::class, 'createCourse'])->name('admin.courses.create');
@@ -55,6 +65,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/reports', [AdminController::class, 'viewReports'])->name('admin.reports.view');
     Route::get('/reports/courses/export', [ReportController::class, 'exportCourses'])->name('admin.reports.exportCourses');
     Route::get('/reports/users/export', [ReportController::class, 'exportUsers'])->name('admin.reports.exportUsers');
+    Route::get('/reports/teachers/export', [ReportController::class, 'exportTeachers'])->name('admin.reports.exportTeachers');
+    Route::get('/reports/students/export', [ReportController::class, 'exportStudents'])->name('admin.reports.exportStudents');
 
     // STUDENTS
     // Rutas del estudiante
@@ -77,7 +89,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/activities', [TeacherController::class, 'viewActivities'])->name('teacher.activities.view');
         Route::get('/activities/create', [TeacherController::class, 'createActivity'])->name('teacher.activities.create'); // Ruta para crear actividad
         Route::post('/activities', [TeacherController::class, 'storeActivity'])->name('teacher.activities.store');
-        
+
         // Ruta para ver las notas
         Route::get('/grades', [TeacherController::class, 'viewGrades'])->name('teacher.grades.view');
         Route::post('/grades/store', [TeacherController::class, 'storeGrade'])->name('teacher.notas.store');
@@ -100,7 +112,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/activities/{id}', [ActivityController::class, 'destroyActivity'])->name('teacher.activities.destroy'); // Eliminar actividad
 
         //Rutas para subir las actividades
-        
+
 
         //Rutas para ver las actividades
         Route::get('submissions', [ActivitySubmissionController::class, 'index'])->name('submissions.index');

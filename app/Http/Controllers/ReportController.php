@@ -81,4 +81,50 @@ class ReportController extends Controller
         fclose($output);
         exit();
     }
+
+    public function exportTeachers(){
+        $teachers = User::where('role', 'teacher')->get();
+        $filename = 'docentes.csv';
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+        $output = fopen('php://output', 'w');
+        fputcsv($output, ['ID', 'Nombre', 'Email', 'Rol', 'Código', 'DNI']);
+        foreach ($teachers as $teacher) {
+            fputcsv($output, [
+                $teacher->id,
+                $teacher->name,
+                $teacher->email,
+                ucfirst($teacher->role),
+                $teacher->codigo,
+                $teacher->teacher->dni ?? 'N/A',
+            ]);
+        }
+        fclose($output);
+        exit();
+    }
+
+    public function exportStudents(){
+        $students = User::where('role', 'student')->get();
+        $filename = 'estudiantes.csv';
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Pragma: no-cache');
+        header('Expires: 0');
+        $output = fopen('php://output', 'w');
+        fputcsv($output, ['ID', 'Nombre', 'Email', 'Rol', 'Código', 'DNI']);
+        foreach ($students as $student) {
+            fputcsv($output, [
+                $student->id,
+                $student->name,
+                $student->email,
+                ucfirst($student->role),
+                $student->codigo,
+                $student->student->dni ?? 'N/A',
+            ]);
+        }
+        fclose($output);
+        exit();
+    }
 }

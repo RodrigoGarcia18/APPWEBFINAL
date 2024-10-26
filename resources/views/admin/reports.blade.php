@@ -12,6 +12,8 @@
         <div class="btn-group" role="group">
             <a href="{{ route('admin.reports.exportCourses') }}" class="btn btn-primary mx-2">Exportar Cursos</a>
             <a href="{{ route('admin.reports.exportUsers') }}" class="btn btn-primary mx-2">Exportar Usuarios</a>
+            <a href="{{ route('admin.reports.exportTeachers') }}" class="btn btn-primary mx-2">Exportar Docentes</a>
+            <a href="{{ route('admin.reports.exportStudents') }}" class="btn btn-primary mx-2">Exportar Estudiantes</a>
         </div>
     </div>
 </div>

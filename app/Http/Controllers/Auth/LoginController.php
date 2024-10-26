@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('auth.login'); 
+        return view('auth.login');
     }
 
     // Maneja la solicitud de inicio de sesión
@@ -23,6 +23,7 @@ class LoginController extends Controller
 
         // Intenta autenticar al usuario
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            session(['user' => $request->email]);
             return redirect()->intended('/dashboard');
         }
 
