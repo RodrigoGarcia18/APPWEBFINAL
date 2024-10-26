@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('period'); 
             $table->string('session_link')->nullable(); //vacio al crearse, el docente asigna su enlace teams o zoom
             $table->text('description')->nullable();
+            $table->decimal('precio', 8, 2)->nullable();
 
             $table->timestamps(); // Fechas de creación y actualización
         });
