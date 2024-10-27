@@ -86,6 +86,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/courses', [TeacherController::class, 'viewCourses'])->name('teacher.courses.view');
         Route::get('/courses/{id}', [TeacherController::class, 'showCourseDetails'])->name('teacher.courses.details'); // Detalles del curso
         Route::post('/courses/{id}/updateSessionLink', [TeacherController::class, 'updateSessionLink'])->name('teacher.courses.updateSessionLink'); // Ruta para actualizar el enlace de sesión
+        Route::post('/courses/{id}/updateMaterialLink', [TeacherController::class, 'updateMaterialLink'])->name('teacher.courses.updateMaterialLink');
         Route::get('/activities', [TeacherController::class, 'viewActivities'])->name('teacher.activities.view');
         Route::get('/activities/create', [TeacherController::class, 'createActivity'])->name('teacher.activities.create'); // Ruta para crear actividad
         Route::post('/activities', [TeacherController::class, 'storeActivity'])->name('teacher.activities.store');

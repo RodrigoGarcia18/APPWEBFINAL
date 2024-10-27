@@ -14,17 +14,17 @@
                     <h3 class="card-title">{{ $course->name }}</h3>
                     <p class="card-text text-muted">{{ $course->description }}</p>
                 </div>
-                <span class="badge bg-primary p-2">{{ $course->course_id }}</span> 
+                <span class="badge bg-primary p-2">{{ $course->course_id }}</span>
             </div>
             <hr>
-            <p class="card-text"><strong>Docentes Asignados:</strong> 
+            <p class="card-text"><strong>Docentes Asignados:</strong>
                 {{ $course->users->filter(function($user) {
-                    return $user->role === 'teacher'; 
+                    return $user->role === 'teacher';
                 })->isNotEmpty() ? $course->users->filter(function($user) {
-                    return $user->role === 'teacher'; 
+                    return $user->role === 'teacher';
                 })->pluck('name')->join(', ') : 'No hay docentes asignados' }}
             </p>
-            
+
             <form method="POST" action="{{ route('teacher.courses.updateSessionLink', $course->id) }}" class="mt-3">
                 @csrf
                 <div class="input-group">
@@ -32,7 +32,15 @@
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                 </div>
             </form>
-            
+
+            <form method="POST" action="{{ route('teacher.courses.updateMaterialLink', $course->id) }}" class="mt-3">
+                @csrf
+                <div class="input-group">
+                    <input type="text" name="material_link" class="form-control" placeholder="Ingrese el enlace del material" value="{{ $course->material_link }}">
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
+            </form>
+
         </div>
     </div>
 
@@ -45,16 +53,16 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Email</th>
-                            <th>DNI/Código</th> 
+                            <th>DNI/Código</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($course->users->where('role', 'student') as $user)
-                            @if ($student = $user->student) 
+                            @if ($student = $user->student)
                                 <tr>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $student->dni }}</td> 
+                                    <td>{{ $student->dni }}</td>
                                 </tr>
                             @endif
                         @endforeach
@@ -74,7 +82,7 @@
 </div>
 
 <style>
-    
+
     .card {
         border-radius: 15px;
         overflow: hidden;
@@ -105,10 +113,10 @@
     }
     .table th, .table td {
         vertical-align: middle;
-        text-align: center; 
+        text-align: center;
     }
     .table-striped tbody tr:nth-of-type(odd) {
-        background-color: #f9f9f9; 
+        background-color: #f9f9f9;
     }
     .table-bordered th, .table-bordered td {
         border: 1px solid #dee2e6;
