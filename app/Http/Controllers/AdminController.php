@@ -196,6 +196,7 @@ class AdminController extends Controller
             'course_id' => 'required|string|max:100',
             'description' => 'nullable|string|max:500',
             'period' => 'required|string|max:100', 
+            'precio'=>'nullable|numeric|min:0|max:999999.99',
             'user_ids' => 'required|array', 
             'user_ids.*' => 'exists:users,id',
         ]);
@@ -206,6 +207,7 @@ class AdminController extends Controller
             'description' => $request->description,
             'period' => $request->period, 
             'session_link' => null, 
+            'precio' =>$request->precio,
         ]);
     
         

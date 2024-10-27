@@ -14,7 +14,8 @@ class Course extends Model
         'name',       // Nombre del curso
         'period',     // Período o semestre
         'description', // Descripción del curso (opcional)
-        'session_link' //link(opcional)
+        'session_link', //link(opcional)
+        'precio'
     ];
 
 

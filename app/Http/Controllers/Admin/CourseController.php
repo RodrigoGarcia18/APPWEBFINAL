@@ -55,6 +55,7 @@ class CourseController extends Controller
             'course_id' => 'required|string|max:100',
             'description' => 'nullable|string|max:500',
             'period' => 'required|string|max:100', 
+            'precio'=>'nullable|numeric|min:0|max:999999.99',
             'user_ids' => 'required|array',
             'user_ids.*' => 'exists:users,id', 
         ]);
@@ -65,6 +66,7 @@ class CourseController extends Controller
             'course_id' => $request->course_id,
             'description' => $request->description,
             'period' => $request->period, 
+            'precio' =>$request->precio, 
         ]);
 
 
@@ -92,6 +94,7 @@ class CourseController extends Controller
             'course_id' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'period' => 'required|string|max:255',
+            'precio'=>'nullable|numeric|min:0|max:999999.99',
             'description' => 'nullable|string',
             'user_ids' => 'required|array',
         ]);

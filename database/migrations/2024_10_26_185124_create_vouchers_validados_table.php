@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('apellidos');
             $table->string('nombre_curso_servicio');
             $table->boolean('estado')->default(false);
-            $table->unsignedBigInteger('voucher_id'); // Clave foránea para vouchers
-            $table->unsignedBigInteger('pagos_siga_id'); // Clave foránea para pagos
+            $table->unsignedBigInteger('voucher_id')->nullable();
+            $table->unsignedBigInteger('pagos_siga_id')->nullable();
 
             $table->timestamps();
             

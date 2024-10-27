@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('precio', 8, 2)->nullable();
 
-            $table->timestamps(); // Fechas de creación y actualización
+            $table->timestamps(); 
         });
     }
 
