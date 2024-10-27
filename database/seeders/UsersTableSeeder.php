@@ -10,7 +10,7 @@ class UsersTableSeeder extends Seeder
 {
     public function run(): void
     {
-        // Crea un usuario admin
+        // Crea un usuario admin para todos los sistemas, como prueba
         DB::table('users')->insert([
             'name' => 'Admin',
             'email' => 'admin@ejemplo.com',
@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder
             ['name' => 'Profesor Dos', 'email' => 'profesor2@ejemplo.com', 'password' => bcrypt('password'), 'role' => 'teacher'],
         ]);
 
-        // Crea 30 estudiantes
+        // Crea 30 estudiantes aleatorios
         for ($i = 1; $i <= 30; $i++) {  
             DB::table('users')->insert([
                 'name' => 'Estudiante ' . $i,

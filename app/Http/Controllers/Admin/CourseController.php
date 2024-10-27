@@ -17,7 +17,6 @@ class CourseController extends Controller
         $user = Auth::user();
         $courses = $user->organization ? $user->organization->courses : collect();
         return view('admin.courses.index', compact('courses'));
-
         
     }
  
