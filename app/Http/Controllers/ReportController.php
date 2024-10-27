@@ -26,7 +26,7 @@ class ReportController extends Controller
         $output = fopen('php://output', 'w');
 
         // Escribir las cabeceras en el CSV
-        fputcsv($output, ['ID', 'Nombre', 'Código de Curso', 'Periodo', 'Descripción', 'Usuarios Asignados']);
+        fputcsv($output, ['ID', 'Nombre', 'Código de Curso', 'Periodo','Precio', 'Descripción', 'Usuarios Asignados']);
 
         // Escribir cada curso en una nueva línea del CSV
         foreach ($courses as $course) {
@@ -35,6 +35,7 @@ class ReportController extends Controller
                 $course->name,
                 $course->course_id,
                 $course->period,
+                $course->precio,
                 $course->description ?? 'No se proporcionó descripción',
                 $course->users->count() > 0 ? implode(', ', $course->users->pluck('name')->toArray()) : 'Sin usuarios asignados',
             ]);
