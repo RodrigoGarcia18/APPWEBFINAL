@@ -29,7 +29,8 @@
                 @csrf
                 <div class="input-group">
                     <input type="text" name="session_link" class="form-control" placeholder="Ingrese el enlace de la sesión" value="{{ $course->session_link }}">
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <button type="submit" id="update-session-link" class="btn btn-primary">Actualizar</button>
+                    <button type="button" id="generate-session-link" class="btn btn-primary">Generar</button>
                 </div>
             </form>
 

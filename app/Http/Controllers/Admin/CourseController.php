@@ -51,30 +51,38 @@ class CourseController extends Controller
     
         $request->validate([
             'name' => 'required|string|max:255',
-            'course_id' => 'required|string|max:100',
+            'course_id' => 'required|string|max:100|unique:courses,course_id',
             'description' => 'nullable|string|max:500',
             'period' => 'required|string|max:100', 
             'precio'=>'nullable|numeric|min:0|max:999999.99',
             'user_ids' => 'required|array',
             'user_ids.*' => 'exists:users,id', 
         ]);
-
-  
+        
         $course = Course::create([
             'name' => $request->name,
             'course_id' => $request->course_id,
             'description' => $request->description,
             'period' => $request->period, 
-            'precio' =>$request->precio, 
+            'precio' =>$request->precio,
+            // Agrega el enlace de la sesión con la url del host mas el nombre del curso
+            'session_link' => url("/meet/{$request->course_id}"),
         ]);
-
 
         $course->users()->attach($request->user_ids);
 
         return redirect()->route('admin.courses.view')->with('success', 'Curso creado exitosamente.');
     }
 
+    public function StartMeeting($courseId)
+    {   
+        $course = Course::where('course_id', $courseId)->first();
+        if (!$course) { // Si no se encuentra el curso.
+            abort(404, 'El curso no existe.'); // Lanza un error 404 con un mensaje.
 
+        }
+        return view('meet.start');
+    }
 
     public function edit($id)
     {

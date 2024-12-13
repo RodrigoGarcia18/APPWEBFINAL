@@ -31,6 +31,7 @@
                         <label for="description">Descripción</label>
                         <textarea name="description" id="description" class="form-control"></textarea>
                     </div>
+
                     <div class="form-group mb-3">
                         <label for="precio">Precio</label>
                         <input type="number" name="precio" id="precio" class="form-control" step="0.01" min="0" placeholder="0.00">
