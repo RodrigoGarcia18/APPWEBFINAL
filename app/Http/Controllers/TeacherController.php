@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use PHPMailer\PHPMailer\PHPMailer;
+use Illuminate\Support\Facades\Http;
+use App\Models\ActivitySubmission;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\User;
@@ -233,34 +236,66 @@ class TeacherController extends Controller
 
     public function updateGrades(Request $request)
     {
+        // Validar la entrada
+        $request->validate([
+            'submissions.*.activity_submission_id' => 'required|exists:activity_submissions,id',
+            'submissions.*.nota' => 'required|numeric|min:0|max:100',
+        ]);
+
         $submissions = $request->input('submissions', []);
 
         foreach ($submissions as $submissionData) {
-
-            $request->validate([
-                'submissions.*.activity_submission_id' => 'required|exists:activity_submissions,id',
-                'submissions.*.nota' => 'required|numeric|min:0|max:100',
-            ]);
-
-
+            // Buscar o crear la nota
             $nota = Nota::where('activity_submission_id', $submissionData['activity_submission_id'])->first();
 
             if ($nota) {
-
+                // Actualizar nota existente
                 $nota->update([
                     'nota' => $submissionData['nota'],
                 ]);
             } else {
-
+                // Crear una nueva nota
                 Nota::create([
                     'activity_submission_id' => $submissionData['activity_submission_id'],
                     'nota' => $submissionData['nota'],
                 ]);
             }
+
+            // Obtener la actividad y el curso relacionado
+            $activitySubmission = ActivitySubmission::find($submissionData['activity_submission_id']);
+            $activity = $activitySubmission->activity; 
+            $course = $activity->course;
+
+            // Obtener el estudiante asociado a la entrega
+            $student = $activitySubmission->user;
+
+            // Verificar si el usuario es un estudiante
+            if ($student && $student->isStudent()) {
+                // Enviar notificación al microservicio
+                try {
+                    $response = Http::post('http://microservicio-notificaciones/api/send-notification', [
+                        'email' => $student->email,
+                        'subject' => 'La Nota Ha Sido Actualizada',
+                        'message' => 'Se ha actualizado la nota para la actividad: ' . $activity->name .
+                                     ' del curso: ' . $course->name .
+                                     '. Tu nueva calificación es: ' . $submissionData['nota'],
+                    ]);
+
+                    // Verificar respuesta del microservicio
+                    if (!$response->successful()) {
+                        return redirect()->route('teacher.grades.view')
+                            ->with('error', 'No se pudo enviar la notificación a uno de los estudiantes.');
+                    }
+                } catch (\Exception $e) {
+                    return redirect()->route('teacher.grades.view')
+                        ->with('error', 'Error al conectar con el microservicio de notificaciones.');
+                }
+            }
         }
 
         return redirect()->route('teacher.grades.view')->with('success', 'Notas actualizadas correctamente.');
     }
+    
 
 
 
