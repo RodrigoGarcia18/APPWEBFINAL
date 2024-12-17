@@ -273,7 +273,7 @@ class TeacherController extends Controller
             if ($student && $student->isStudent()) {
                 // Enviar notificación al microservicio
                 try {
-                    $response = Http::post('http://microservicio-notificaciones/api/send-notification', [
+                    $response = Http::post('http://35.224.43.49:8087/api/send-notification', [
                         'email' => $student->email,
                         'subject' => 'La Nota Ha Sido Actualizada',
                         'message' => 'Se ha actualizado la nota para la actividad: ' . $activity->name .

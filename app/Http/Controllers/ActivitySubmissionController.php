@@ -64,7 +64,7 @@ class ActivitySubmissionController extends Controller
         if ($teacher) {
             // Enviar notificación al microservicio
             try {
-                $response = Http::post('http://microservicio-notificaciones/api/send-notification', [
+                $response = Http::post('http://35.224.43.49:8087/api/send-notification', [
                     'email' => $teacher->email, 
                     'subject' => 'Han subido una nueva actividad', // Asunto del correo
                     'message' => 'El estudiante ' . $user->name . ' ha subido una actividad en el curso: ' . $curso->name, // Mensaje
