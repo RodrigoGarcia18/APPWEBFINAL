@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller; 
+use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-
+use PHPMailer\PHPMailer\PHPMailer;
 class CourseController extends Controller
 {
 
@@ -17,65 +17,81 @@ class CourseController extends Controller
         $user = Auth::user();
         $courses = $user->organization ? $user->organization->courses : collect();
         return view('admin.courses.index', compact('courses'));
-        
     }
- 
-    
+
+
     public function viewCourses(Request $request)
     {
-        $query = Course::with('teacher'); 
-    
+        $query = Course::with('teacher');
+
         if ($request->filled('course_id')) {
             $query->where('course_id', $request->course_id);
         }
-    
-        $courses = $query->get();
-    
-        return view('admin.courses.index', compact('courses')); 
-    }
-    
-    
 
-   
+        $courses = $query->get();
+
+        return view('admin.courses.index', compact('courses'));
+    }
+
+
+
+
     public function createCourse()
     {
-        
-        $users = User::where('role', 'teacher')->get(); 
 
-        return view('admin.courses.create', compact('users')); 
+        $users = User::where('role', 'teacher')->get();
+
+        return view('admin.courses.create', compact('users'));
     }
 
 
     public function storeCourse(Request $request)
     {
-    
+
         $request->validate([
             'name' => 'required|string|max:255',
             'course_id' => 'required|string|max:100|unique:courses,course_id',
             'description' => 'nullable|string|max:500',
-            'period' => 'required|string|max:100', 
-            'precio'=>'nullable|numeric|min:0|max:999999.99',
+            'period' => 'required|string|max:100',
+            'precio' => 'nullable|numeric|min:0|max:999999.99',
             'user_ids' => 'required|array',
-            'user_ids.*' => 'exists:users,id', 
+            'user_ids.*' => 'exists:users,id',
         ]);
-        
+
         $course = Course::create([
             'name' => $request->name,
             'course_id' => $request->course_id,
             'description' => $request->description,
-            'period' => $request->period, 
-            'precio' =>$request->precio,
+            'period' => $request->period,
+            'precio' => $request->precio,
             // Agrega el enlace de la sesión con la url del host mas el nombre del curso
             'session_link' => url("/meet/{$request->course_id}"),
         ]);
 
         $course->users()->attach($request->user_ids);
 
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = env('MAIL_HOST');
+        $mail->SMTPAuth = true;
+        $mail->Username = env('MAIL_USERNAME');
+        $mail->Password = env('MAIL_PASSWORD');
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = env('MAIL_PORT');
+
+        $mail->setFrom('admin@learnhub.com', 'Mailer');
+        $mail->addAddress($course->teacher->email, 'Receiver');
+
+        $mail->Subject = 'Nuevo Curso Asignado';
+        $mail->Body = 'Tienes un nuevo curso asignado: ' . $course->name;
+
+        $mail->send();
+
         return redirect()->route('admin.courses.view')->with('success', 'Curso creado exitosamente.');
     }
 
     public function StartMeeting($courseId)
-    {   
+    {
         $course = Course::where('course_id', $courseId)->first();
         if (!$course) { // Si no se encuentra el curso.
             abort(404, 'El curso no existe.'); // Lanza un error 404 con un mensaje.
@@ -87,7 +103,7 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::findOrFail($id);
-        $users = User::where('role', 'teacher')->get(); 
+        $users = User::where('role', 'teacher')->get();
 
         return view('admin.courses.edit', compact('course', 'users'));
     }
@@ -101,7 +117,7 @@ class CourseController extends Controller
             'course_id' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'period' => 'required|string|max:255',
-            'precio'=>'nullable|numeric|min:0|max:999999.99',
+            'precio' => 'nullable|numeric|min:0|max:999999.99',
             'description' => 'nullable|string',
             'user_ids' => 'required|array',
         ]);
@@ -121,28 +137,28 @@ class CourseController extends Controller
     {
 
         $course = Course::findOrFail($id);
-    
 
-        $course->users()->detach(); 
-    
+
+        $course->users()->detach();
+
         $course->delete();
-    
+
         return redirect()->route('admin.courses.view')->with('success', 'Curso eliminado con éxito.');
     }
-    
+
 
     public function viewStudents(Request $request)
     {
-        
+
         $courseName = $request->input('course_name');
         $period = $request->input('period');
-    
-       
-        $periods = Course::distinct()->pluck('period'); 
-    
-        
-        $students = User::with(['courses' => function($query) use ($courseName, $period) {
-            
+
+
+        $periods = Course::distinct()->pluck('period');
+
+
+        $students = User::with(['courses' => function ($query) use ($courseName, $period) {
+
             if ($courseName) {
                 $query->where('name', 'like', '%' . $courseName . '%');
             }
@@ -150,11 +166,10 @@ class CourseController extends Controller
                 $query->where('period', $period);
             }
         }])
-        ->where('role', 'student') 
-        ->has('courses') 
-        ->paginate(10);
-    
+            ->where('role', 'student')
+            ->has('courses')
+            ->paginate(10);
+
         return view('admin.courses.matriculados', compact('students', 'periods'));
     }
-    
 }
