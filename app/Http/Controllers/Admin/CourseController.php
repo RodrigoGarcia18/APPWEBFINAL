@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use OpenAdmin\Admin\Grid\Filter\Where;
 use PHPMailer\PHPMailer\PHPMailer;
 class CourseController extends Controller
 {
@@ -68,7 +70,7 @@ class CourseController extends Controller
             'session_link' => url("/meet/{$request->course_id}"),
         ]);
 
-        $course->users()->attach($request->user_ids);
+        $teacher = $course->users()->where('role', 'teacher')->first();
 
         $mail = new PHPMailer();
         $mail->isSMTP();
@@ -80,7 +82,8 @@ class CourseController extends Controller
         $mail->Port = env('MAIL_PORT');
 
         $mail->setFrom('admin@learnhub.com', 'Mailer');
-        $mail->addAddress($course->teacher->email, 'Receiver');
+        $mail->addAddress('e70205523@gmail.com', 'Receiver');
+        //$mail->addAddress($teacher->email, 'Receiver');
 
         $mail->Subject = 'Nuevo Curso Asignado';
         $mail->Body = 'Tienes un nuevo curso asignado: ' . $course->name;

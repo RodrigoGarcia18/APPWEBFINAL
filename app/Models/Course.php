@@ -30,8 +30,7 @@ class Course extends Model
     public function teacher()
     {
         return $this->belongsToMany(User::class, 'course_user')
-                    ->where('role', 'teacher');   
-                
+                    ->where('role', 'teacher')->first();   
     }
     
     public function activities()
