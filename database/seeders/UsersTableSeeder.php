@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
 
         // Crea 2 profesores
         DB::table('users')->insert([
-            ['name' => 'Profesor Uno', 'email' => 'profesor1@ejemplo.com', 'password' => bcrypt('password'), 'role' => 'teacher'],
+            ['name' => 'Profesor Uno', 'email' => 'e70205523@gmail.com', 'password' => bcrypt('password'), 'role' => 'teacher'],
             ['name' => 'Profesor Dos', 'email' => 'profesor2@ejemplo.com', 'password' => bcrypt('password'), 'role' => 'teacher'],
         ]);
 
@@ -34,5 +34,12 @@ class UsersTableSeeder extends Seeder
                 'role' => 'student',
             ]);
         }
+
+        DB::table('users')->insert([
+            'name' => 'Rodrigo' . $i,
+            'email' => 'rodrigogt0259@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => 'student',
+        ]);
     }
 }
